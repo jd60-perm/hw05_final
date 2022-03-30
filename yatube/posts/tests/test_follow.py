@@ -11,7 +11,9 @@ class FollowURLTests(TestCase):
         cls.FIRST_OBJECT_INDEX = 0
         cls.author_user = User.objects.create_user(username='author')
         cls.follower_user = User.objects.create_user(username='follower')
-        cls.non_follower_user = User.objects.create_user(username='non_follower')
+        cls.non_follower_user = User.objects.create_user(
+            username='non_follower'
+        )
         cls.first_post = Post.objects.create(
             author=cls.author_user,
             text='Тестовый пост Тестовый пост Тестовый пост',
@@ -32,7 +34,7 @@ class FollowURLTests(TestCase):
         """Авторизованный пользователь может подписываться на других
         пользователей
         """
-        response = self.non_follower_client.get(reverse(
+        self.non_follower_client.get(reverse(
             'posts:profile_follow',
             kwargs={'username': self.author_user.username}
         ))
@@ -45,7 +47,7 @@ class FollowURLTests(TestCase):
         """Авторизованный пользователь может удалять из подписок других
         пользователей
         """
-        response = self.follower_client.get(reverse(
+        self.follower_client.get(reverse(
             'posts:profile_unfollow',
             kwargs={'username': self.author_user.username}
         ))
@@ -82,7 +84,7 @@ class FollowURLTests(TestCase):
         response_before_new_post = self.non_follower_client.get(reverse(
             'posts:follow_index'
         ))
-        second_post = Post.objects.create(
+        Post.objects.create(
             author=self.author_user,
             text='Тестовый2пост2Тестовый2пост2Тестовый2пост',
         )
