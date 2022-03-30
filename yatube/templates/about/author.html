@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block content %}
+{% load static %}
+{% load thumbnail %}
+<h1>Привет, я автор</h1>
+<p>
+  Мой аккаунт на GITHUB:
+  <br>
+  <a class="navbar-brand" href="http://github.com/jd60-perm">jd60-perm</a>
+</p>
+<p>
+  Идеальный порядок на рабочем месте
+  <br>
+  {% comment %} {% thumbnail item.image "100x100" crop="center" as im %} {% endcomment %}
+  {% comment %} <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"> {% endcomment %}
+    <img src="{% static 'img/desktop.jpg' %}" class="d-inline-block align-top" alt="">
+  {% comment %} {% endthumbnail %} {% endcomment %}
+</p>
+{% endblock %} 
