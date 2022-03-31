@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
@@ -9,6 +8,7 @@ from .models import Follow, Group, Post, User
 
 LIST_VOLUME: int = 10
 CACHE_DELAY_SECONDS: float = 20
+
 
 @cache_page(CACHE_DELAY_SECONDS)
 def index(request):
@@ -44,9 +44,9 @@ def profile(request, username):
     page_obj = paginator.get_page(page_number)
     template = 'posts/profile.html'
     following = request.user.is_authenticated and Follow.objects.filter(
-            user=request.user,
-            author=selected_user
-        ).exists()
+        user=request.user,
+        author=selected_user
+    ).exists()
     context = {
         'author': selected_user,
         'count': count,
