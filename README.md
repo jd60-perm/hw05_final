@@ -48,4 +48,5 @@ python yatube/manage.py createsuperuser
 python yatube/manage.py runserver
 ```
 
-ТЕСТ ВОРКФЛОУ
+
+![example workflow](https://github.com/jd60-perm/hw05_final/actions/workflows/main.yml/badge.svg)
